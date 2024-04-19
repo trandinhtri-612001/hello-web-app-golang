@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        stage('Run SonarQube Analysis') {
-            steps {
-                script {
-                        sh '/usr/local/sonar/bin/sonar-scanner -X -Dsonar.organization=wm-demo -Dsonar.projectKey=wm-demo_hello-webapp-golang -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
-                }
-            }
-        }
+        // stage('Run SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //                 sh '/usr/local/sonar/bin/sonar-scanner -X -Dsonar.organization=wm-demo -Dsonar.projectKey=wm-demo_hello-webapp-golang -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
+        //         }
+        //     }
+        // }
 
         stage('Build') {
             steps {
@@ -56,18 +56,18 @@ pipeline {
            }
        }
 
-        stage('Push Docker Image') {
-           steps {
-               script {
-                   withCredentials([usernamePassword(credentialsId: 'DOCKER_REGISTRY_CREDENTIALS_ID', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                       sh """
-                           echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-                           docker push dab8106/hellogo
-                       """
-                   }
-               }
-           }
-       }
+    //     stage('Push Docker Image') {
+    //        steps {
+    //            script {
+    //                withCredentials([usernamePassword(credentialsId: 'DOCKER_REGISTRY_CREDENTIALS_ID', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+    //                    sh """
+    //                        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+    //                        docker push dab8106/hellogo
+    //                    """
+    //                }
+    //            }
+    //        }
+    //    }
 
        // stage('Terraform Apply') {
        //      environment {
@@ -87,15 +87,15 @@ pipeline {
        //      }
        //  }
 
-        stage('Run Ansible Playbook') {
-            steps {
-                script {
-                    sh '''
-                        ansible-playbook ansible/deploy-container.yaml
-                    '''
-                }
-            }
-        }
+        // stage('Run Ansible Playbook') {
+        //     steps {
+        //         script {
+        //             sh '''
+        //                 ansible-playbook ansible/deploy-container.yaml
+        //             '''
+        //         }
+        //     }
+        // }
     }
 
     post {
