@@ -51,15 +51,14 @@ pipeline {
         stage('Build Docker Image') {
            steps {
                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-                    sh lable: '',script: 'docker build -t harrytran61/helloAppGo:1.0'
-                    sh lable: '',script: 'docker push harrytran61/helloAppGo:1.0'
+                    sh label: '',script: 'docker build -t harrytran61/helloAppGo:1.0'
                 }
            }
         }
         stage('Push Docker Image') {
              steps {
                withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
-                    sh lable: '',script: 'docker push harrytran61/helloAppGo:1.0'
+                    sh label: '',script: 'docker push harrytran61/helloAppGo:1.0'
                 }
            }
         }
