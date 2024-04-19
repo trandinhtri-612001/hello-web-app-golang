@@ -5,9 +5,9 @@ pipeline {
        go 'go-1.21.3'
     }
 
-    environment {
-        SONAR_TOKEN = credentials('SONAR_TOKEN') // Reference Jenkins credential ID
-    }
+    // environment {
+    //     SONAR_TOKEN = credentials('SONAR_TOKEN') // Reference Jenkins credential ID
+    // }
 
     stages {
         stage('Unit Test') {
