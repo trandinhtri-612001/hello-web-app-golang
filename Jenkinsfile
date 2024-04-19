@@ -50,24 +50,19 @@ pipeline {
 
         stage('Build Docker Image') {
            steps {
-               script {
-                   sh 'docker build -t dab8106/hellogo .'
-               }
+               withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh lable: '',script: 'docker build -t harrytran61/helloAppGo:1.0'
+                    sh lable: '',script: 'docker push harrytran61/helloAppGo:1.0'
+                }
            }
-       }
-
-    //     stage('Push Docker Image') {
-    //        steps {
-    //            script {
-    //                withCredentials([usernamePassword(credentialsId: 'DOCKER_REGISTRY_CREDENTIALS_ID', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-    //                    sh """
-    //                        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
-    //                        docker push dab8106/hellogo
-    //                    """
-    //                }
-    //            }
-    //        }
-    //    }
+        }
+        stage('Push Docker Image') {
+             steps {
+               withDockerRegistry(credentialsId: 'docker-hub', url: 'https://index.docker.io/v1/') {
+                    sh lable: '',script: 'docker push harrytran61/helloAppGo:1.0'
+                }
+           }
+        }
 
        // stage('Terraform Apply') {
        //      environment {
