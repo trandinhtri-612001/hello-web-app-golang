@@ -5,9 +5,9 @@ pipeline {
        go 'go-1.21.3'
     }
 
-    environment {
-        SONAR_TOKEN = credentials('SONAR_TOKEN') // Reference Jenkins credential ID
-    }
+    // environment {
+    //     SONAR_TOKEN = credentials('SONAR_TOKEN') // Reference Jenkins credential ID
+    // }
 
     stages {
         stage('Unit Test') {
@@ -29,13 +29,13 @@ pipeline {
             }
         }
 
-        stage('Run SonarQube Analysis') {
-            steps {
-                script {
-                        sh '/usr/local/sonar/bin/sonar-scanner -X -Dsonar.organization=wm-demo -Dsonar.projectKey=wm-demo_hello-webapp-golang -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
-                }
-            }
-        }
+        // stage('Run SonarQube Analysis') {
+        //     steps {
+        //         script {
+        //                 sh '/usr/local/sonar/bin/sonar-scanner -X -Dsonar.organization=wm-demo -Dsonar.projectKey=wm-demo_hello-webapp-golang -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io'
+        //         }
+        //     }
+        // }
 
         stage('Build') {
             steps {
