@@ -48,13 +48,13 @@ pipeline {
             }
         }
 
-       //  stage('Build Docker Image') {
-       //     steps {
-       //         script {
-       //             sh 'DOCKER_BUILDKIT=1 docker build -t harrytran61/hellogo .'
-       //         }
-       //     }
-       // }
+        stage('Build Docker Image') {
+           steps {
+               script {
+                   sh 'docker build -t harrytran61/hellogo .'
+               }
+           }
+       }
 
     //     stage('Push Docker Image') {
     //        steps {
