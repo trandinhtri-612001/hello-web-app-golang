@@ -51,7 +51,7 @@ pipeline {
         stage('Build Docker Image') {
            steps {
                script {
-                   sh 'docker build -t harrytran61/hellogo .'
+                   sh 'DOCKER_BUILDKIT=1 docker build -t harrytran61/hellogo .'
                }
            }
        }
